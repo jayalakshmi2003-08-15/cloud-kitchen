@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Menu Items</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .form-container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+            font-size: 28px;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6600, #ff9a44);
+            border-radius: 2px;
+        }
+        
+        label {
+            display: block;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #555;
+            text-align: left;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background-color: #f9f9f9;
+        }
+        
+        input:focus, select:focus {
+            border-color: #ff6600;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.2);
+            background-color: white;
+        }
+        
+        input::placeholder {
+            color: #aaa;
+        }
+        
+        button {
+            width: 100%;
+            padding: 16px;
+            margin-top: 25px;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        button[onclick="addItem()"] {
+            background: linear-gradient(135deg, #ff6600 0%, #ff8e53 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 102, 0, 0.3);
+        }
+        
+        button[onclick="viewMenuList()"] {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        button i {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Add New Menu Item</h2>
+        <form id="menuForm">
+            <label for="date">Select Date:</label>
+            <input type="date" id="date" required>
+
+            <label for="item-name">Item Name:</label>
+            <input type="text" id="item-name" required>
+
+            <label for="price">Price:</label>
+            <input type="number" id="price" required>
+
+            <label for="food-type">Food Type:</label>
+            <select id="food-type" required>
+                <option value="">Select Category</option>
+                <option value="Breakfast">Breakfast</option>
+                <option value="Lunch">Lunch</option>
+                <option value="Dinner">Dinner</option>
+                <option value="Snacks">Snacks</option>
+                <option value="Dessert">Dessert</option>
+                <option value="Beverages">Beverages</option>
+            </select>
+
+            <label for="image-url">Image URL (Optional):</label>
+            <input type="text" id="image-url" placeholder="Paste image link here">
+
+            <button type="button" onclick="addItem()">
+                <i class="fas fa-plus-circle"></i>
+                Add Item
+            </button>
+            <button type="button" onclick="viewMenuList()">
+                <i class="fas fa-list-ul"></i>
+                View Menu List
+            </button>
+        </form>
+    </div>
+
+    <script>
+        function addItem() {
+            let date = document.getElementById("date").value;
+            let itemName = document.getElementById("item-name").value;
+            let price = document.getElementById("price").value;
+            let foodType = document.getElementById("food-type").value;
+            let imageUrl = document.getElementById("image-url").value || "placeholder.jpg";
+
+            if (date === "" || itemName === "" || price === "" || foodType === "") {
+                alert("Please fill in all required fields!");
+                return;
+            }
+
+            let menuData = JSON.parse(localStorage.getItem("menuData")) || {};
+            if (!menuData[date]) {
+                menuData[date] = [];
+            }
+
+            menuData[date].push({ name: itemName, price: price, type: foodType, image: imageUrl });
+            localStorage.setItem("menuData", JSON.stringify(menuData));
+
+            alert("Item added successfully!");
+            document.getElementById("menuForm").reset();
+        }
+
+        function viewMenuList() {
+            window.location.href = "menu-list.html";
+        }
+    </script>
+
+</body>
+</html>

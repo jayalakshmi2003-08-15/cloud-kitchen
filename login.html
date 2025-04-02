@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: url('admin-background.jpg') no-repeat center center/cover;
+            margin: 0;
+        }
+        h2 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        form {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            width: 350px;
+            animation: fadeIn 1s ease-in-out;
+        }
+        input {
+            margin: 10px 0;
+            padding: 14px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            background: #f4f4f4;
+            transition: 0.3s;
+        }
+        input:focus {
+            background: #e0e0e0;
+            outline: none;
+        }
+        button {
+            padding: 14px;
+            border: none;
+            background: #ff6600;
+            color: white;
+            border-radius: 6px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out, transform 0.2s;
+        }
+        button:hover {
+            background: #e65c00;
+            transform: scale(1.05);
+        }
+        #responseMessage {
+            margin-top: 15px;
+            font-weight: bold;
+            font-size: 16px;
+            color: white;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>Admin Login</h2>
+    <form id="loginForm">
+        <input type="text" id="username" name="username" placeholder="Username" required>
+        <input type="password" id="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+    <p id="responseMessage"></p>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
+            e.preventDefault(); // Prevent page refresh
+
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let responseMessage = document.getElementById("responseMessage");
+            
+            // Dummy credentials for testing
+            let validUsername = "admin";
+            let validPassword = "1234";
+
+            if (username === validUsername && password === validPassword) {
+                responseMessage.innerHTML = "<span style='color: #2ecc71;'>Login successful! Redirecting...</span>";
+                setTimeout(function() {
+                    window.location.href = 'afterlogin.html'; // Redirect to menu page
+                }, 1500);
+            } else {
+                responseMessage.innerHTML = "<span style='color: #e74c3c;'>Invalid username or password.</span>";
+            }
+        });
+    </script>
+</body>
+</html>

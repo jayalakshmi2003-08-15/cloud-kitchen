@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Kitchen - Hero Section</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #333;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .admin-login {
+            background: #ff6b00;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .admin-login:hover {
+            background: #e65c00;
+        }
+
+        .hero {
+            height: 80vh;
+            background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') no-repeat center center/cover;
+            background-color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+        }
+        
+        .hero-content h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+        
+        .hero-content p {
+            font-size: 20px;
+        }
+        
+        .about-section {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            scroll-margin-top: 100px;
+        }
+        
+        h2 {
+            color: #d35400;
+        }
+        
+        p {
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .contact-section {
+            text-align:center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff3e0;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 50px auto;
+            scroll-margin-top: 100px;
+        }
+
+        .contact-section h2 {
+            color: #d35400;
+            margin-bottom: 15px;
+        }
+
+        .contact-section p {
+            font-size: 16px;
+            color: #555;
+            margin: 5px 0;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Cloud Kitchen</h1>
+        <ul class="nav-links">
+            <li><a href="menu_display.html">Menu</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact Us</a></li>
+        </ul>
+        <div>
+            <a href="login.html" class="admin-login">Admin Login</a>
+            <a href="userlogin1.html" class="admin-login">User Login</a>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <p>Welcome to our kitchen, where delicious meals are made fresh every day.</p>
+        </div>
+    </section>
+    
+    <div id="about" class="about-section">
+        <h2>About Us</h2>
+        <p>Welcome to <strong>Flavorscape Kitchen</strong>, where we bring the joy of cooking to your home. Our kitchen is dedicated to providing delicious, high-quality meals made with fresh ingredients and a touch of love.</p>
+        <p>Whether you're looking for traditional flavors or modern recipes, we ensure every dish is crafted to perfection. At <strong>Flavorscape Kitchen</strong>, we believe that good food brings people together.</p>
+        <p>Experience the best of homemade flavors with us!</p>
+    </div>
+    
+    <div id="contact" class="contact-section">
+        <h2>Contact Us</h2>
+        <p><strong>Email:</strong> contact@flavorscapekitchen.com</p>
+        <p><strong>Phone:</strong> +123-456-7890</p>
+        <p><strong>Address:</strong> 123 Food Street, Culinary City, FL 56789</p>
+    </div>
+</body>
+</html>
