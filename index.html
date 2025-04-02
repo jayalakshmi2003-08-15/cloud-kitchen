@@ -1,82 +1,199 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Cloud Kitchen - Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Kitchen - Hero Section</title>
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #f8f8f8;
+        * {
             margin: 0;
-            padding: 20px;
-            text-align: center;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
+        
         .header {
-            background: #ff6600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background: #333;
             color: white;
-            padding: 20px;
-            margin-bottom: 30px;
         }
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+        .nav-links {
+            list-style: none;
+            display: flex;
             gap: 20px;
-            padding: 20px;
         }
-        .food-card {
+
+        .nav-links li {
+            display: inline;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px;
+        }
+
+        .nav-links a:hover {
+            text-decoration: underline;
+        }
+
+        .login-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .admin-login {
+            background: #ff6b00;
+            color: white;
+            padding: 15px 30px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .admin-login:hover {
+            background: #e65c00;
+        }
+
+        .hero {
+            height: 80vh;
+            background: url('https://images.unsplash.com/photo-1600891964599-f61ba0e24092') no-repeat center center/cover;
+            background-color: #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 600px;
+        }
+        
+        .about-section {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
             background: white;
             border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
         }
-        .food-card:hover {
-            transform: translateY(-5px);
+        h2 {
+            color: #d35400;
         }
-        .food-img {
-            width: 100%;
-            height: 120px;
-            object-fit: cover;
-            border-radius: 8px;
+        p {
+            color: #333;
+            line-height: 1.6;
         }
-        .food-name {
-            font-weight: bold;
-            margin: 10px 0 5px;
+
+        .contact-section {
+            text-align:center;
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #fff3e0;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        .btn {
-            display: inline-block;
-            background: #ff6600;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
+
+        .contact-section h2 {
+            color: #d35400;
+            margin-bottom: 15px;
         }
+
+        .contact-section p {
+            font-size: 16px;
+            color: #555;
+            margin: 5px 0;
+        }
+
     </style>
+    <script>
+        // Check login status
+        function checkLogin(event) {
+            if (!localStorage.getItem("isLoggedIn")) {
+                event.preventDefault(); // Prevent navigation
+                alert("Please log in first to access the menu.");
+            }
+        }
+
+        // Function to log out
+        function logout() {
+            localStorage.removeItem("isLoggedIn");
+            alert("You have logged out.");
+            location.reload();
+        }
+
+        // Show/hide login/logout buttons based on login status
+        window.onload = function () {
+            let loginButtons = document.getElementById("login-buttons");
+            let logoutButton = document.getElementById("logout-button");
+
+            if (localStorage.getItem("isLoggedIn")) {
+                loginButtons.style.display = "none"; // Hide login buttons
+                logoutButton.style.display = "block"; // Show logout button
+            } else {
+                loginButtons.style.display = "flex"; // Show login buttons
+                logoutButton.style.display = "none"; // Hide logout button
+            }
+        };
+    </script>
 </head>
 <body>
     <div class="header">
-        <h1>Cloud Kitchen Specials</h1>
-        <p>Fresh meals delivered daily</p>
+        <h1>Cloud Kitchen</h1>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="menu_display.html" onclick="checkLogin(event)">Menu</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+        <div id="login-buttons" class="login-buttons">
+            <a href="login.html" class="admin-login">Admin Login</a>
+            <a href="userlogin.html" class="admin-login">User Login</a>
+        </div>
+        <button id="logout-button" class="admin-login" style="display: none;" onclick="logout()">Logout</button>
     </div>
 
-    <div class="menu-grid">
-        <!-- Green Tea -->
-        <div class="food-card">
-            <img src="greentea.png" alt="Green Tea" class="food-img">
-            <div class="food-name">Green Tea</div>
-            <div>₹25</div>
+    <section class="hero">
+        <div class="overlay"></div>
+        <div class="hero-content">
+            <p>Welcome to our kitchen, where delicious meals are made fresh every day.</p>
         </div>
+    </section>
 
-        <!-- Idly -->
-        <div class="food-card">
-            <img src="idly.jpg" alt="Idly" class="food-img">
-            <div class="food-name">Idly</div>
-            <div>₹50</div>
-        </div>
-
-        <!-- Add more items following the same pattern -->
+    <div class="about-section">
+        <h2>About Us</h2>
+        <p>Welcome to <strong>Flavorscape Kitchen</strong>, where we bring the joy of cooking to your home. Our kitchen is dedicated to providing delicious, high-quality meals made with fresh ingredients and a touch of love.</p>
+        <p>Whether you're looking for traditional flavors or modern recipes, we ensure every dish is crafted to perfection. At <strong>Flavorscape Kitchen</strong>, we believe that good food brings people together.</p>
+        <p>Experience the best of homemade flavors with us!</p>
     </div>
 
-    <a href="menu.html" class="btn">View Full Menu →</a>
+    <div class="contact-section">
+        <h2>Contact Us</h2>
+        <p><strong>Email:</strong> contact@flavorscapekitchen.com</p>
+        <p><strong>Phone:</strong> +123-456-7890</p>
+        <p><strong>Address:</strong> 123 Food Street, Culinary City, FL 56789</p>
+    </div>
 </body>
 </html>
